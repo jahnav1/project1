@@ -10,10 +10,19 @@ pool:
   name: jahnavi
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: UiPathPack@4
+  inputs:
+         versionType: 'CurrentVersion'
+ 	       projectJsonPath: '$(Build.SourcesDirectory)/project.json'
+         orchestratorConnection: 'MyOrchCon'
+         outputPath: '$(Build.ArtifactStagingDirectory)/output'
+         tracelevel: 'verbose'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+	- task: UiPathDeploy@4
+ inputs:
+         orchestratorConnection: 'MyOrchCon'
+         PackagesPath: '$(Build.ArtifactStagingDirectory)/output'
+         Createprocess: true
+         folderName: 'Shared'
+         tracelevel: 'verbose'
+
