@@ -10,13 +10,6 @@ pool:
   name: JahnaviAgent
 
 steps:
-- task: UiPathPack@4
-  inputs:
-    versionType: 'CurrentVersion'
-    projectJsonPath: '$(Build.SourcesDirectory)/project.json'
-    orchestratorConnection: 'AzureDevops'
-    outputPath: '$(Build.ArtifactStagingDirectory)/output'
-    tracelevel: 'verbose'
 
 - task: UiPathDeploy@4
   inputs:
